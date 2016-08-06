@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <style>
+      #anitube {
+        margin-bottom:20px;
+      }
+      #getSrc {
+        margin-bottom:30px;
+      }
+      #list {
+        margin-left:50px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+    function getMp4(url){
+      //var url = "http://www.anitube.se/video/5054/Darker-than-Black-24";
+  //    var url = $(location).attr('href');
+      var number = url.substring(28,url.indexOf("/",28));
+      var id_aniPlayer = "#aniPlayer" + number;
+
+      var mp4 = $(id_aniPlayer +" video").attr('src');
+      return mp4;
+    }
+
+    function test(){
+      var url = "";
+      $('#anitube iframe').attr('src').val(url);
+    }
+
+    $(function(){
+      $('#btn').on('click',function(){
+        $('#frame').attr('src',$('#getSrc #url').val());
+      })
+
+      $('#getVideos').on('click',function(){
+       var mainlist = $('mainList').children('.videoTitle').children('a');
+       var ml_len = mainlist.length;
+
+       for (var i = 1; i < mainlist.length; i++) {
+         $('#list').html(''+
+              '<li><a href="'+ mainlist.eq(i).attr(href) +'">'+ mainlist.eq(i).text() +'</a></li>'
+          )
+       }
+        $('#frame').contents().find()
+      })
+    })
+
+
+    </script>
+  </head>
+  <body>
+    <div id="anitube">
+        <iframe src="" id="frame" width="720" height="480"></iframe>
+    </div>
+    <div id="getSrc">
+      <div>カテゴリのURLを入力してください （例:http://www.anitube.se/categories/0000/xx-xx-xx）</div>
+      <input type="text" size="80" id="url" value="http://www.anitube.se/categories/2687/Gyakuten-Saiban-Ace-Attorney" />
+      <button id="btn">Go</button>
+      <p>
+        <button id="getVideos">動画一覧取得</button>
+      </p>
+    </div>
+
+    <div id="list">
+    </div>
+</html>
